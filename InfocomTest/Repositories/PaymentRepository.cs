@@ -14,6 +14,7 @@ public class PaymentRepository : IPaymentRepository
         _context = context;
     }
 
+    // Получает текущий баланс пользователя.
     public async Task<decimal> GetUserBalanceAsync(string userId)
     {
         return await _context.Users
@@ -22,6 +23,7 @@ public class PaymentRepository : IPaymentRepository
             .FirstOrDefaultAsync();
     }
 
+    // Списывает указанную сумму с баланса пользователя.
     public async Task<bool> DeductBalanceAsync(string userId, decimal amount)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
@@ -33,6 +35,7 @@ public class PaymentRepository : IPaymentRepository
         return true;
     }
 
+    // Добавляет запись о платеже в базу данных.
     public async Task AddPaymentAsync(PaymentEntity payment)
     {
         _context.Payments.Add(payment);

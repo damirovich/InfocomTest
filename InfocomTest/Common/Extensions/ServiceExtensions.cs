@@ -109,7 +109,7 @@ public static class ServiceExtensions
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 In = ParameterLocation.Header,
-                Description = "Введите токен в формате: Bearer {token}",
+                Description = "Введите токен в формате: {token}",
                 Name = "Authorization",
                 Type = SecuritySchemeType.Http,
                 Scheme = "bearer"

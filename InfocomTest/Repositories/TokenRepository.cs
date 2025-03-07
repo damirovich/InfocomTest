@@ -14,11 +14,13 @@ public class TokenRepository : ITokenRepository
         _context = context;
     }
 
+    // Проверяет, был ли токен аннулирован.
     public async Task<bool> IsTokenRevokedAsync(string jti)
     {
         return await _context.RevokedTokens.AnyAsync(t => t.Jti == jti);
     }
 
+    // Аннулирует токен, добавляя его в список отозванных.
     public async Task InvalidateTokenAsync(string jti, DateTime expiration)
     {
         _context.RevokedTokens.Add(new RevokedTokenEntity { Jti = jti, Expiration = expiration });
